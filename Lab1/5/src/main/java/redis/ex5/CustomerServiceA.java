@@ -18,12 +18,9 @@ public class CustomerServiceA {
     public boolean requestProduct(String username, String product) {
         String userKey = REDIS_KEY + username;
         Map<String, String> userData = jedis.hgetAll(userKey);
-
         long currentTime = System.currentTimeMillis() / 1000;
-
         int requestCount;
         long firstRequestTime;
-
         if (!userData.isEmpty()) {
             requestCount = Integer.parseInt(userData.get("request_count"));
             firstRequestTime = Long.parseLong(userData.get("first_request_time"));
@@ -31,29 +28,22 @@ public class CustomerServiceA {
             requestCount = 0;
             firstRequestTime = currentTime;
         }
-
         if (currentTime - firstRequestTime >= TIME_SLOT_IN_SECONDS) {
             requestCount = 0;
         }
-
         if (requestCount >= MAX_PRODUCTS_PER_USER) {
             return false;
         }
-
         jedis.hset(userKey, "request_count", String.valueOf(requestCount + 1));
         jedis.hset(userKey, "first_request_time", String.valueOf(currentTime));
         jedis.rpush(userKey + ":requests", product);
-
         return true;
     }
 
     public static void main(String[] args) {
         CustomerServiceA customerService = new CustomerServiceA();
-
-        // Simulate user requests
         String username = "ricardo";
         String product = "product";
-
         for (int i = 0; i < 32; i++) {
             boolean allowed = customerService.requestProduct(username, product + String.valueOf(i));
             System.out.print("Product number: " + String.valueOf(i + 1) + ". ");

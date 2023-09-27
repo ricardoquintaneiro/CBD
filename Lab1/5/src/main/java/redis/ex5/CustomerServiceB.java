@@ -1,6 +1,7 @@
 package redis.ex5;
 
 import java.util.Map;
+import java.util.Scanner;
 
 import redis.clients.jedis.Jedis;
 
@@ -19,7 +20,6 @@ public class CustomerServiceB {
         String userKey = REDIS_KEY + username;
         String productsKey = userKey + ":product_counts";
         Map<String, String> userData = jedis.hgetAll(userKey);
-
         long currentTime = System.currentTimeMillis() / 1000;
         long firstRequestTime;
         int requestCount;
@@ -31,60 +31,62 @@ public class CustomerServiceB {
             requestCount = 0;
             firstRequestTime = currentTime;
         }
-
         if (currentTime - firstRequestTime >= TIME_SLOT_IN_SECONDS) {
             requestCount = 0;
         }
-
         if (requestCount + units > MAX_UNITS_PER_PRODUCT) {
             return false;
         }
-
         jedis.hset(userKey, "first_request_time", String.valueOf(currentTime));
         jedis.hset(productsKey, product, String.valueOf(requestCount + units));
-
         return true;
+    }
+
+    public void clearAllRequests(String username) {
+        String userKey = REDIS_KEY + username;
+        String productsKey = userKey + ":product_counts";
+        jedis.del(userKey);
+        jedis.del(productsKey);
     }
 
     public static void main(String[] args) {
         CustomerServiceB customerService = new CustomerServiceB();
-
-        String username = "ricardo";
-        String product = "product";
-        int units = 30;
-
-        for (int i = 0; i < 2; i++) {
-            boolean allowed = customerService.requestProduct(username, product + String.valueOf(i), units + i);
-            System.out.print("Product: " + String.valueOf(i + 1) + ". Units: " + String.valueOf(units + i));
-            if (allowed) {
-                System.out.println("\tRequest accepted.");
-            } else {
-                System.out.println("\tRequest rejected: Exceeded limit.");
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your username: ");
+        String username = scanner.nextLine();
+        while (true) {
+            System.out.println("\nOptions:");
+            System.out.println("1. Make a request");
+            System.out.println("2. Clear all requests");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice (1/2/3): ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter the product name: ");
+                    String product = scanner.nextLine();
+                    System.out.print("Enter the number of units: ");
+                    int units = scanner.nextInt();
+                    scanner.nextLine();
+                    boolean allowed = customerService.requestProduct(username, product, units);
+                    if (allowed) {
+                        System.out.println("\nRequest accepted.");
+                    } else {
+                        System.out.println("\nRequest rejected: Exceeded limit!");
+                    }
+                    break;
+                case 2:
+                    customerService.clearAllRequests(username);
+                    System.out.println("\nAll requests cleared.");
+                    break;
+                case 3:
+                    System.out.println("\nExiting Customer Service.");
+                    scanner.close();
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. Please select 1, 2, or 3.");
             }
-        }
-
-        boolean allowed = customerService.requestProduct(username, "product3", 29);
-        System.out.print("Product: " + 3 + ". Units: " + String.valueOf(29));
-        if (allowed) {
-            System.out.println("\tRequest accepted.");
-        } else {
-            System.out.println("\tRequest rejected: Exceeded limit.");
-        }
-
-        allowed = customerService.requestProduct(username, "product3", 2);
-        System.out.print("Product: " + 3 + ". Units: " + String.valueOf(2));
-        if (allowed) {
-            System.out.println("\tRequest accepted.");
-        } else {
-            System.out.println("\tRequest rejected: Exceeded limit.");
-        }
-
-        allowed = customerService.requestProduct(username, "product3", 1);
-        System.out.print("Product: " + 3 + ". Units: " + String.valueOf(1));
-        if (allowed) {
-            System.out.println("\tRequest accepted.");
-        } else {
-            System.out.println("\tRequest rejected: Exceeded limit.");
         }
     }
 }

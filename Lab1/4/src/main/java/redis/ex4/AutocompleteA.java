@@ -12,7 +12,7 @@ import redis.clients.jedis.resps.ScanResult;
 public class AutocompleteA {
 
     private Jedis jedis;
-	public static String NOMES = "nomes"; // Key set for users' name
+	public static String NOMES = "nomes";
 	
 	public AutocompleteA() {
 		this.jedis = new Jedis();

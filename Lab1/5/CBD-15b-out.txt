@@ -1,5 +1,67 @@
-Product: 1. Units: 30   Request accepted.
-Product: 2. Units: 31   Request rejected: Exceeded limit.
-Product: 3. Units: 29   Request accepted.
-Product: 3. Units: 2    Request rejected: Exceeded limit.
-Product: 3. Units: 1    Request accepted.
+Enter your username: Ricardo
+
+Options:
+1. Make a request
+2. Clear all requests
+3. Exit
+Enter your choice (1/2/3): 1
+Enter the product name: Produto_1
+Enter the number of units: 31
+
+Request rejected: Exceeded limit!
+
+Options:
+1. Make a request
+2. Clear all requests
+3. Exit
+Enter your choice (1/2/3): 1
+Enter the product name: Produto_1
+Enter the number of units: 29
+
+Request accepted.
+
+Options:
+1. Make a request
+2. Clear all requests
+3. Exit
+Enter your choice (1/2/3): 1
+Enter the product name: Produto_1
+Enter the number of units: 2
+
+Request rejected: Exceeded limit!
+
+Options:
+1. Make a request
+2. Clear all requests
+3. Exit
+Enter your choice (1/2/3): 1
+Enter the product name: Produto_1
+Enter the number of units: 1
+
+Request accepted.
+
+Options:
+1. Make a request
+2. Clear all requests
+3. Exit
+Enter your choice (1/2/3): 1
+Enter the product name: Produto_2
+Enter the number of units: 30
+
+Request accepted.
+
+Options:
+1. Make a request
+2. Clear all requests
+3. Exit
+Enter your choice (1/2/3): 2
+
+All requests cleared.
+
+Options:
+1. Make a request
+2. Clear all requests
+3. Exit
+Enter your choice (1/2/3): 3
+
+Exiting Customer Service.
