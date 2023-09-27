@@ -41,15 +41,15 @@ public class AutocompleteA {
 	}
 	
     public static void main(String[] args) {
-		File ficheiro_nomes = new File("./names.txt");
+		File ficheiro_nomes = new File("./src/main/resources/names.txt");
 		try (Scanner sc = new Scanner(ficheiro_nomes)) {
 			AutocompleteA board = new AutocompleteA();
-			while (sc.hasNextLine()) {
+						while (sc.hasNextLine()) {
 				board.saveName(sc.nextLine());
 			}
 			sc.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("Ficheiro não encontrado.");
+			System.out.println("File not found.");
 			e.printStackTrace();
 		}
 
