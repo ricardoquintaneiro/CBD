@@ -5,7 +5,7 @@ import java.util.Map;
 import redis.clients.jedis.Jedis;
 
 public class CustomerServiceA {
-    private static final String REDIS_KEY = "customer_service:";
+    private static final String REDIS_KEY = "customer_service_a:";
     private static final int MAX_PRODUCTS_PER_USER = 30;
     private static final int TIME_SLOT_IN_SECONDS = 3600;
 
@@ -22,17 +22,17 @@ public class CustomerServiceA {
         long currentTime = System.currentTimeMillis() / 1000;
 
         int requestCount;
-        long lastRequestTime;
+        long firstRequestTime;
 
         if (!userData.isEmpty()) {
             requestCount = Integer.parseInt(userData.get("request_count"));
-            lastRequestTime = Long.parseLong(userData.get("first_request_time"));
+            firstRequestTime = Long.parseLong(userData.get("first_request_time"));
         } else {
             requestCount = 0;
-            lastRequestTime = currentTime;
+            firstRequestTime = currentTime;
         }
 
-        if (currentTime - lastRequestTime >= TIME_SLOT_IN_SECONDS) {
+        if (currentTime - firstRequestTime >= TIME_SLOT_IN_SECONDS) {
             requestCount = 0;
         }
 

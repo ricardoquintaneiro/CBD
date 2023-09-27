@@ -1,0 +1,5 @@
+Product: 1. Units: 30   Request accepted.
+Product: 2. Units: 31   Request rejected: Exceeded limit.
+Product: 3. Units: 29   Request accepted.
+Product: 3. Units: 2    Request rejected: Exceeded limit.
+Product: 3. Units: 1    Request accepted.
