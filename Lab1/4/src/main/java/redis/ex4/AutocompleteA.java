@@ -7,13 +7,14 @@ import java.util.Set;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.params.ScanParams;
+import redis.clients.jedis.resps.ScanResult;
 
-public class Names {
+public class AutocompleteA {
 
     private Jedis jedis;
 	public static String NOMES = "nomes"; // Key set for users' name
 	
-	public Names() {
+	public AutocompleteA() {
 		this.jedis = new Jedis();
 	}
  
@@ -27,16 +28,22 @@ public class Names {
 
 	public List<String> getMatches(String prefix) {
 		ScanParams params = new ScanParams();
-		params.match(prefix + "*");
-		List<String> results = jedis.sscan(NOMES, ScanParams.SCAN_POINTER_START, params).getResult();
-		results.stream().forEach(System.out::println);
-		return results;
+        params.match(prefix + "*");
+        String cursor = ScanParams.SCAN_POINTER_START;
+        List<String> results = new java.util.ArrayList<>();
+        do {
+            ScanResult<String> scanResult = jedis.sscan(NOMES, cursor, params);
+            List<String> partialResults = scanResult.getResult();
+            results.addAll(partialResults);
+            cursor = scanResult.getCursor();
+        } while (!cursor.equals(ScanParams.SCAN_POINTER_START));
+        return results;
 	}
 	
     public static void main(String[] args) {
-		File ficheiro_nomes = new File("./ex4/names.txt");
+		File ficheiro_nomes = new File("./names.txt");
 		try (Scanner sc = new Scanner(ficheiro_nomes)) {
-			Names board = new Names();
+			AutocompleteA board = new AutocompleteA();
 			while (sc.hasNextLine()) {
 				board.saveName(sc.nextLine());
 			}
@@ -46,8 +53,7 @@ public class Names {
 			e.printStackTrace();
 		}
 
-		Names board = new Names();
-		board.getNomes().stream().forEach(System.out::println);
+		AutocompleteA board = new AutocompleteA();
 		System.out.print("Search for ('Enter' for quit): ");
 		Scanner sc = new Scanner(System.in);
 		String prefix = sc.nextLine();
