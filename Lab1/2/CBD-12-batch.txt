@@ -1,0 +1,13 @@
+SET key "Hello"
+SET key2 "Hi"
+SET chave "Ola"
+APPEND chave " mundo!"
+SADD testSet "test"
+SADD testSet "test2"
+ZADD testSortedSet 1 "Um"
+ZADD testSortedSet 2 "Dois"
+ZADD testSortedSet 3 "Tres"
+HSET hashes ola hello
+HSET hashes mundo world
+RPUSH list1 1 2 3 "four"
+LSET list1 3 4

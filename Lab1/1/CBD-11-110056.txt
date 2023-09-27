@@ -1,0 +1,56 @@
+help
+quit
+set key "Hello"
+set key2 "Hi"
+del key key2
+keys
+keys *
+set chave "Ola"
+keys *
+get chave
+append chave " mundo!"
+get chave
+strlen chave
+randomkey
+rename chave helloKey
+set testTTL "test"
+ttl testTTL
+expire testTTL 2
+get testTTL
+type helloKey
+exists helloKey
+exists testTTL
+SADD helloKey "Olá mundo!" "Hello World!"
+SADD helloKey "Ola mundo!" "Hello World!"
+SMEMBERS helloKey
+SADD helloKey "Ola mundo!"
+SADD testSet "test"
+SADD testSet "test2"
+SMEMBERS testSet
+ZADD testSortedSet 1 "Um"
+ZADD testSortedSet 2 "Dois"
+ZADD testSortedSet 3 "Tres"
+ZRANGE testSortedSet 0 -1
+ZRANGE testSortedSet 0 -1 WITHSCORES
+HSET hashes ola hello
+HSET hashes ola hi
+HSET hashes mundo world
+HGET hashes ola
+HGET hashes mundo
+HGETALL hashes
+HKEYS
+HKEYS hashes
+HLEN hashes
+HVALS hashes
+RPUSH list1 1 2 3 "four"
+LRANGE list1 0 -1
+LSET list1 0 4
+LTRIM list 1 2
+LRANGE list1 0 -1
+LSET list1 3 4
+LSET list1 0 1
+LRANGE list1 0 -1
+LTRIM list1 0 2
+LRANGE list1 0 -1
+LINDEX list1 2
+quit
