@@ -89,6 +89,7 @@ public class AutocompleteB {
                 break;
             List<String> matches = board.getMatches(prefix);
             matches.forEach(System.out::println);
+            System.out.println();
         }
         sc.close();
     }

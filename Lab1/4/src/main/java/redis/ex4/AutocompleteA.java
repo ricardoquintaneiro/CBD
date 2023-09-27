@@ -59,7 +59,7 @@ public class AutocompleteA {
 		String prefix = sc.nextLine();
 		while (!prefix.equals("")) {
 			board.getMatches(prefix).stream().forEach(System.out::println);
-			System.out.print("Search for ('Enter' for quit): ");
+			System.out.print("\nSearch for ('Enter' for quit): ");
 			prefix = sc.nextLine();
 		}
 		sc.close();
