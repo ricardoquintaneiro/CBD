@@ -1,0 +1,15 @@
+NoSql Booster
+
+Com docker:
+
+	Depois de docker run:
+	docker start mongoserver
+	sudo docker exec -it mongoserver bash
+
+Sem docker:
+
+mongosh é a cli
+mongod é o daemon
+	sudo systemctl status mongod
+	run Amp/mongo*
+	sudo systemctl restart mongod
