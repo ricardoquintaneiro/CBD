@@ -475,7 +475,7 @@ db.restaurants.find({localidade: {$in: ['Staten Island', 'Queens', 'Brooklyn']}}
 // 13. Liste o nome, a localidade, o score e gastronomia dos restaurantes que alcançaram
 // sempre pontuações inferiores ou igual a 3.
 db.restaurants.find({'grades.score': {$lte: 3}}, { _id: 0, 'grades.score': 1, nome: 1, localidade: 1, gastronomia: 1 })
-
+# TODO
 {
     localidade: 'Bronx',
     gastronomia: 'American',
@@ -497,39 +497,461 @@ db.restaurants.find({'grades.score': {$lte: 3}}, { _id: 0, 'grades.score': 1, no
 
 // 14. Liste o nome e as avaliações dos restaurantes que obtiveram uma avaliação com
 // um grade "A", um score 10 na data "2014-08-11T00: 00: 00Z" (ISODATE).
-
+db.restaurants.find({grades: {date: new Date('2014-08-11T00:00:00Z'), grade: 'A', score: 10}}, { _id: 0, nome: 1, grades: 1})
+# TODO - elemMatch
+[
+  {
+    grades: [
+      {
+        date: ISODate("2014-08-11T00:00:00.000Z"),
+        grade: 'A',
+        score: 10
+      },
+      {
+        date: ISODate("2014-03-14T00:00:00.000Z"),
+        grade: 'A',
+        score: 3
+      },
+      {
+        date: ISODate("2013-01-16T00:00:00.000Z"),
+        grade: 'A',
+        score: 10
+      },
+      {
+        date: ISODate("2012-07-12T00:00:00.000Z"),
+        grade: 'A',
+        score: 9
+      }
+    ],
+    nome: 'Serendipity 3'
+  },
+  {
+    grades: [
+      {
+        date: ISODate("2014-08-11T00:00:00.000Z"),
+        grade: 'A',
+        score: 10
+      },
+      {
+        date: ISODate("2013-08-30T00:00:00.000Z"),
+        grade: 'A',
+        score: 12
+      },
+      {
+        date: ISODate("2012-08-31T00:00:00.000Z"),
+        grade: 'A',
+        score: 4
+      },
+      {
+        date: ISODate("2012-04-13T00:00:00.000Z"),
+        grade: 'A',
+        score: 9
+      }
+    ],
+    nome: 'Mutual Of America'
+  },
+  {
+    grades: [
+      {
+        date: ISODate("2014-08-11T00:00:00.000Z"),
+        grade: 'A',
+        score: 10
+      },
+      {
+        date: ISODate("2014-01-27T00:00:00.000Z"),
+        grade: 'B',
+        score: 22
+      },
+      {
+        date: ISODate("2013-06-26T00:00:00.000Z"),
+        grade: 'C',
+        score: 37
+      },
+      {
+        date: ISODate("2012-09-05T00:00:00.000Z"),
+        grade: 'C',
+        score: 29
+      },
+      {
+        date: ISODate("2012-04-16T00:00:00.000Z"),
+        grade: 'C',
+        score: 33
+      }
+    ],
+    nome: 'Udon West'
+  },
+  {
+    grades: [
+      {
+        date: ISODate("2015-01-05T00:00:00.000Z"),
+        grade: 'A',
+        score: 9
+      },
+      {
+        date: ISODate("2014-08-11T00:00:00.000Z"),
+        grade: 'A',
+        score: 10
+      },
+      {
+        date: ISODate("2014-03-04T00:00:00.000Z"),
+        grade: 'B',
+        score: 22
+      },
+      {
+        date: ISODate("2013-09-13T00:00:00.000Z"),
+        grade: 'A',
+        score: 5
+      },
+      {
+        date: ISODate("2013-01-16T00:00:00.000Z"),
+        grade: 'A',
+        score: 11
+      }
+    ],
+    nome: "Gene'S Coffee Shop"
+  },
+  {
+    grades: [
+      {
+        date: ISODate("2014-08-11T00:00:00.000Z"),
+        grade: 'A',
+        score: 10
+      },
+      {
+        date: ISODate("2014-02-20T00:00:00.000Z"),
+        grade: 'A',
+        score: 7
+      },
+      {
+        date: ISODate("2013-08-29T00:00:00.000Z"),
+        grade: 'A',
+        score: 7
+      },
+      {
+        date: ISODate("2013-03-29T00:00:00.000Z"),
+        grade: 'A',
+        score: 10
+      },
+      {
+        date: ISODate("2012-03-07T00:00:00.000Z"),
+        grade: 'A',
+        score: 12
+      },
+      {
+        date: ISODate("2011-11-18T00:00:00.000Z"),
+        grade: 'A',
+        score: 11
+      },
+      {
+        date: ISODate("2011-10-12T00:00:00.000Z"),
+        grade: 'P',
+        score: 4
+      }
+    ],
+    nome: 'Union Cafe Restaurant'
+  },
+  {
+    grades: [
+      {
+        date: ISODate("2014-08-11T00:00:00.000Z"),
+        grade: 'A',
+        score: 10
+      },
+      {
+        date: ISODate("2013-08-28T00:00:00.000Z"),
+        grade: 'A',
+        score: 9
+      },
+      {
+        date: ISODate("2012-09-05T00:00:00.000Z"),
+        grade: 'A',
+        score: 11
+      },
+      {
+        date: ISODate("2011-08-25T00:00:00.000Z"),
+        grade: 'A',
+        score: 7
+      }
+    ],
+    nome: "Jojo'S Pizza"
+  }
+]
 
 
 // 15. Liste o restaurant_id, o nome e os score dos restaurantes nos quais a segunda
 // avaliação foi grade "A" e ocorreu em ISODATE "2014-08-11T00: 00: 00Z".
+db.restaurants.find({$and:[{"grades.1.grade": "A"} , {"grades.1.date": ISODate("2014-08-11T00:00:00Z")}]},{"_id":0 ,"restaurant_id":1 ,"nome":1, "grades.score":1})
+
+[
+  {
+    grades: [
+      { score: 10 },
+      { score: 9 },
+      { score: 13 },
+      { score: 10 },
+      { score: 11 }
+    ],
+    nome: 'Club Macanudo (Cigar Bar)',
+    restaurant_id: '40526406'
+  },
+  {
+    grades: [
+      { score: 9 },
+      { score: 10 },
+      { score: 22 },
+      { score: 5 },
+      { score: 11 }
+    ],
+    nome: "Gene'S Coffee Shop",
+    restaurant_id: '40614916'
+  }
+]
+
 
 // 16. Liste o restaurant_id, o nome, o endereço (address) e as coordenadas geográficas
 // (coord) dos restaurantes onde o 2º elemento da matriz de coordenadas tem um
 // valor superior a 42 e inferior ou igual a 52.
+db.restaurants.find({'address.coord.1': {$gt: 42, $lte: 52}}, { _id: 0, restaurant_id: 1, nome: 1, address: 1})
+
+[
+  {
+    address: {
+      building: '47',
+      coord: [ -78.877224, 42.89546199999999 ],
+      rua: 'Broadway @ Trinity Pl',
+      zipcode: '10006'
+    },
+    nome: "T.G.I. Friday'S",
+    restaurant_id: '40387990'
+  },
+  {
+    address: {
+      building: '1',
+      coord: [ -0.7119979, 51.6514664 ],
+      rua: 'Pennplaza E, Penn Sta',
+      zipcode: '10001'
+    },
+    nome: 'T.G.I. Fridays',
+    restaurant_id: '40388936'
+  },
+  {
+    address: {
+      building: '3000',
+      coord: [ -87.86567699999999, 42.61150920000001 ],
+      rua: '47 Avenue',
+      zipcode: '11101'
+    },
+    nome: "Di Luvio'S Deli",
+    restaurant_id: '40402284'
+  },
+  {
+    address: {
+      building: '21972199',
+      coord: [ -78.589606, 42.8912372 ],
+      rua: 'Broadway',
+      zipcode: '10024'
+    },
+    nome: 'La Caridad 78',
+    restaurant_id: '40568285'
+  },
+  {
+    address: {
+      building: '7981',
+      coord: [ -84.9751215, 45.4713351 ],
+      rua: 'Hoyt Street',
+      zipcode: '11201'
+    },
+    nome: "Bijan'S",
+    restaurant_id: '40876618'
+  },
+  {
+    address: {
+      building: '0',
+      coord: [ -88.0778799, 42.4154769 ],
+      rua: '& Grand Central',
+      zipcode: '10017'
+    },
+    nome: 'Hyatt, Ny Central/Room Service',
+    restaurant_id: '40879243'
+  },
+  {
+    address: {
+      building: '60',
+      coord: [ -111.9975205, 42.0970258 ],
+      rua: 'West Side Highway',
+      zipcode: '10006'
+    },
+    nome: 'Sports Center At Chelsea Piers (Sushi Bar)',
+    restaurant_id: '40882356'
+  }
+]
 
 // 17. Liste nome, gastronomia e localidade de todos os restaurantes ordenando por ordem
 // crescente da gastronomia e, em segundo, por ordem decrescente de localidade.
+db.restaurants.find({}, {_id: 0, nome: 1, gastronomia: 1, localidade: 1}).sort({gastronomia: 1, localidade: -1})
+
+[
+  {
+    localidade: 'Manhattan',
+    gastronomia: 'Afghan',
+    nome: 'Afghan Kebab House'
+  },
+  {
+    localidade: 'Manhattan',
+    gastronomia: 'Afghan',
+    nome: 'Khyber Pass'
+  },
+  {
+    localidade: 'Manhattan',
+    gastronomia: 'Afghan',
+    nome: 'Afghan Kebab House #1'
+  },
+  {
+    localidade: 'Manhattan',
+    gastronomia: 'Afghan',
+    nome: 'Ariana Kebab House'
+  },
+  {
+    localidade: 'Queens',
+    gastronomia: 'African',
+    nome: 'Africana Restaurant'
+  },
+  { localidade: 'Brooklyn', gastronomia: 'African', nome: 'Madiba' },
+  {
+    localidade: 'Bronx',
+    gastronomia: 'African',
+    nome: 'African Terrace'
+  },
 
 // 18. Liste nome, localidade, grade e gastronomia de todos os restaurantes localizados em
 // Brooklyn que não incluem gastronomia "American" e obtiveram uma classificação
 // (grade) "A". Deve apresentá-los por ordem decrescente de gastronomia.
+db.restaurants.find({localidade: 'Brooklyn', gastronomia: {$ne: 'American'}, 'grades.grade': 'A'}, {_id: 0, nome: 1, gastronomia: 1, localidade: 1, 'grades.grade': 1}).sort({gastronomia: -1})
+
+[
+  {
+    localidade: 'Brooklyn',
+    gastronomia: 'Vegetarian',
+    grades: [
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'C' },
+      { grade: 'A' }
+    ],
+    nome: 'Strictly Vegetarian'
+  },
+  {
+    localidade: 'Brooklyn',
+    gastronomia: 'Vegetarian',
+    grades: [
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'C' }
+    ],
+    nome: 'Original Vegetarian Restaurant'
+  },
+  {
+    localidade: 'Brooklyn',
+    gastronomia: 'Vegetarian',
+    grades: [ { grade: 'A' }, { grade: 'A' }, { grade: 'A' } ],
+    nome: 'Bliss Bakery & Cafe'
+  },
+  {
+    localidade: 'Brooklyn',
+    gastronomia: 'Turkish',
+    grades: [
+      { grade: 'A' },
+      { grade: 'B' },
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'C' },
+      { grade: 'A' },
+      { grade: 'A' }
+    ],
+    nome: 'Sahara Restaurant'
+  },
+  {
+    localidade: 'Brooklyn',
+    gastronomia: 'Turkish',
+    grades: [ { grade: 'A' }, { grade: 'A' }, { grade: 'A' }, { grade: 'A' } ],
+    nome: 'Istanbul Restaurant'
+  },
+
 
 // 19. Indique o número total de avaliações (numGrades) na coleção.
+db.restaurants.aggregate([{$group: {_id: "restaurants", numGrades: {$sum: {$size: "$grades"}}}}])
+
+// [ { _id: 'restaurants', numGrades: 18142 } ]
+
 
 // 20. Apresente o nome e número de avaliações (numGrades) dos 3 restaurante com
 // mais avaliações.
+db.restaurants.aggregate([{$group: {_id: "$nome", numGrades: {$sum: {$size: "$grades"}}}},{"$sort" : {"numGrades": -1}},{"$limit": 3}])
+
+// [
+//   { _id: 'Starbucks Coffee', numGrades: 424 },
+//   { _id: "Mcdonald'S", numGrades: 385 },
+//   { _id: "Domino'S Pizza", numGrades: 185 }
+// ]
+
 
 // 21. Apresente o número total de avaliações (numGrades) em cada dia da semana.
+db.restaurants.aggregate([{ $unwind: "$grades" }, { $group: { _id: { $isoDayOfWeek: "$grades.date" }, numGrades: { $sum: 1 }}}, {$sort: {_id: 1}}])
+
+// [
+//   { _id: 1, numGrades: 3186 },
+//   { _id: 2, numGrades: 3878 },
+//   { _id: 3, numGrades: 4118 },
+//   { _id: 4, numGrades: 3984 },
+//   { _id: 5, numGrades: 2440 },
+//   { _id: 6, numGrades: 529 },
+//   { _id: 7, numGrades: 7 }
+// ]
+
 
 // 22. Conte o total de restaurante existentes em cada localidade.
+db.restaurants.aggregate({ $group: { _id: "$localidade", numRestaurantes: { $sum: 1 }}})
+
+// [
+//   { _id: 'Manhattan', numRestaurantes: 1883 },
+//   { _id: 'Brooklyn', numRestaurantes: 684 },
+//   { _id: 'Queens', numRestaurantes: 738 },
+//   { _id: 'Staten Island', numRestaurantes: 158 },
+//   { _id: 'Bronx', numRestaurantes: 309 }
+// ]
 
 // 23. Indique os restaurantes que têm gastronomia "Portuguese", o somatório de score é
 // superior a 50 e estão numa latitude inferior a -60.
+db.restaurants.aggregate([{ $match: { gastronomia: "Portuguese", "address.coord.0": {$lt: -60} } }, {$unwind: "$grades"}, { $group: { _id: "$restaurant_id", scoreTotal: { $sum: "$grades.score" } } }, {$match: {scoreTotal : {$gt : 50}}}])
+// [
+//   { _id: '40535455', scoreTotal: 80 },
+//   { _id: '40394518', scoreTotal: 67 }
+// ]
 
 // 24. Apresente o número de gastronomias diferentes na rua "Fifth Avenue"
+db.restaurants.aggregate([{ $match: { 'address.rua': 'Fifth Avenue' } }, { $group: { _id: "$gastronomia" } }, {$count: "gastronomias_diferentes"}])
+// [ { gastronomias_diferentes: 4 } ]
 
 // 25. Apresente o nome e o score médio (avgScore) e número de avaliações (numGrades)
 // dos restaurantes com score médio superior a 30 desde 1-Jan-2014.
+db.restaurants.aggregate([{$unwind: "$grades"}, {$match: {"grades.date": {$gt: ISODate("2014-01-01T00:00:00Z")}}},{ $group: { _id: "$restaurant_id", nome: {$first: "$nome"} ,avgScore: { $avg: "$grades.score" }, numGrades: { $sum: 1 } } }, {$match: {avgScore : {$gt : 30}}}, {$project: {_id: 0}}])
+// [
+//   { nome: 'Crystal Palace', avgScore: 34.5, numGrades: 2 },
+//   {
+//     nome: 'Miyagi Japanese Home Cooking',
+//     avgScore: 32.5,
+//     numGrades: 2
+//   },
+//   { nome: 'Cafe Lalo', avgScore: 50, numGrades: 1 },
+//   {
+//     nome: 'Good Enough To Eat (A.G. Bistro)',
+//     avgScore: 30.5,
+//     numGrades: 2
+//   },
 
 // 26. .. 30. Descreva 5 perguntas adicionais à base dados (alíneas 26 a 30),
 // significativamente distintas das anteriores, e apresente igualmente a solução de
