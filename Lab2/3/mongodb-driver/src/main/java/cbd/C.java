@@ -2,6 +2,11 @@ package cbd;
 
 import static com.mongodb.client.model.Sorts.ascending;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,47 +33,66 @@ public class C {
                 // Ex 10 - 10. Liste o restaurant_id, o nome, a localidade e gastronomia dos
                 // restaurantes cujo nome
                 // começam por "Wil".
+                System.out.println("Ex 10\n");
+
                 Bson filter = Filters.regex("nome", "^Wil");
                 restaurantesCollection.find(filter)
-                                .projection(Projections.include("localidade", "gastronomia", "nome", "restaurant_id"))
+                                .projection(Projections.fields(Projections.include("restaurant_id", "nome",
+                                                "localidade", "gastronomia"), Projections.excludeId()))
                                 .forEach(doc -> System.out.println(doc.toJson().indent(4)));
 
                 // Ex 12 - Liste o restaurant_id, o nome, a localidade e a gastronomia dos
-                // restaurantes
-                // localizados em "Staten Island", "Queens", ou "Brooklyn.
-                // filter = Filters.or(Filters.in("localidade", Arrays.asList("Staten Island",
-                // "Queens", "Brooklyn")));
-                // restaurantesCollection.find(filter).projection(Projections.include("localidade",
-                // "gastronomia", "nome", "restaurant_id"))
-                // .forEach(doc -> System.out.println(doc.toJson().indent(4)));
+                // restaurantes localizados em "Staten Island", "Queens", ou "Brooklyn.
+
+                // LIMITADO A 3 RESULTADOS
+
+                System.out.println("Ex 12 - Limitado a 3 resultados\n");
+
+                filter = Filters.or(Filters.in("localidade", Arrays.asList("Staten Island",
+                                "Queens", "Brooklyn")));
+                restaurantesCollection.find(filter).projection(Projections.fields(Projections.include("localidade",
+                                "gastronomia", "nome", "restaurant_id"), Projections.excludeId()))
+                                .limit(3)
+                                .forEach(doc -> System.out.println(doc.toJson().indent(4)));
 
                 // // 15. Liste o restaurant_id, o nome e os score dos restaurantes nos quais a
                 // segunda
                 // // avaliação foi grade "A" e ocorreu em ISODATE "2014-08-11T00: 00: 00Z".
-                // // db.restaurants.find({$and:[{"grades.1.grade": "A"} , {"grades.1.date":
-                // ISODate("2014-08-11T00:00:00Z")}]},{"_id":0 ,"restaurant_id":1 ,"nome":1,
-                // "grades.score":1})
-                // filter = Filters.and(Filters.eq("grades.1.grade", "A"),
-                // Filters.eq("grades.1.date", "2014-08-11T00:00:00Z"));
-                // restaurantesCollection.find(filter).projection(Projections.include("grades",
-                // "nome", "restaurant_id"))
-                // .forEach(doc -> System.out.println(doc.toJson().indent(4)));
+                System.out.println("Ex 15\n");
+
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+
+                filter = Filters.and(Filters.eq("grades.1.grade", "A"),
+                                Filters.eq("grades.1.date",
+                                                LocalDateTime.from(dateFormat.parse("2014-08-11T00:00:00Z"))));
+                restaurantesCollection.find(filter).projection(Projections.fields(Projections.include("grades.score",
+                                "nome", "restaurant_id"), Projections.excludeId()))
+                                .forEach(doc -> System.out.println(doc.toJson().indent(4)));
 
                 // Ex 19 - Indique o número total de avaliações (numGrades) na coleção.
-                // List<Bson> filters =
-                // Arrays.asList(Aggregates.group(Accumulators.sum("numGrades", )))));
-                // restaurantesCollection.aggregate(filters)
-                // .forEach(doc -> System.out.println(doc.toJson().indent(4)));
+                System.out.println("Ex 19\n");
 
-                // Ex 20 - 20. Apresente o nome e número de avaliações (numGrades) dos 3 restaurante com
+                List<Bson> filters = Arrays.asList(
+                                Aggregates.group("restaurants",
+                                                Accumulators.sum("numGrades", new Document("$sum",
+                                                                new Document("$size", "$grades")))));
+                restaurantesCollection.aggregate(filters)
+                                .forEach(doc -> System.out.println(doc.toJson().indent(4)));
+
+                // Ex 20 - 20. Apresente o nome e número de avaliações (numGrades) dos 3
+                // restaurante com
                 // mais avaliações.
-                Projection gradesProj = Projections.include("grades");
-                String grades = restaurantesCollection.find().projection(gradesProj).;
-                List<Bson> filters = Arrays.asList(Aggregates.sort(ascending("numGrades")),
-                                Aggregates.limit(3),
-                                Aggregates.group("$nome", Accumulators.sum("numGrades", )));
-                restaurantesCollection.aggregate(filters).forEach(doc -> System.out.println(doc.toJson().indent(4)));
+                System.out.println("Ex 20\n");
 
+                List<Bson> aggregationFilters = Arrays.asList(
+                                Aggregates.group("$nome",
+                                                Accumulators.sum("numGrades",
+                                                                new Document("$sum",
+                                                                                new Document("$size", "$grades")))),
+                                Aggregates.sort(new Document("numGrades", -1)),
+                                Aggregates.limit(3));
+                restaurantesCollection.aggregate(aggregationFilters)
+                                .forEach(doc -> System.out.println(doc.toJson().indent(4)));
 
                 mongoClient.close();
         }
