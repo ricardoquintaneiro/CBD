@@ -7,22 +7,17 @@ import java.util.Arrays;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
-import com.mongodb.ConnectionString;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 
 public class A {
     public static void main(String[] args) {
-        ConnectionString connectionString = new ConnectionString("mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.10.6");
-        MongoClient mongoClient = MongoClients.create(connectionString);
-        MongoDatabase cbdDatabase = mongoClient.getDatabase("cbd");
-        MongoCollection<Document> restaurantesCollection = cbdDatabase.getCollection("restaurants");
+        RestaurantsDB restaurantsDB = new RestaurantsDB();
+
+        MongoCollection<Document> restaurantsCollection = restaurantsDB.getRestaurantsCollection();
 
         Bson filter = Filters.and(Filters.eq("localidade", "Bronx"), Filters.gt("grades.score", 65));
-        restaurantesCollection.find(filter).sort(ascending("nome")).forEach(doc -> System.out.println(doc.toJson().indent(4)));
+        restaurantsCollection.find(filter).sort(ascending("nome")).forEach(doc -> System.out.println(doc.toJson().indent(4)));
 
         Document newRestaurant = new Document("address", new Document("building", "1").append("coord", Arrays.asList(40.0, 50.0)).append("rua", "Rua da Igreja").append("zipcode", "3840-000"))
             .append("localidade", "Vagos")
@@ -31,13 +26,11 @@ public class A {
             .append("nome", "Café do Ric")
             .append("restaurant_id", "999999999");
 
-        restaurantesCollection.insertOne(newRestaurant);
+        restaurantsCollection.insertOne(newRestaurant);
         
         filter = Filters.eq("nome", "Café do Ric");
-        restaurantesCollection.find(filter).forEach(doc -> System.out.println(doc.toJson().indent(4)));
+        restaurantsCollection.find(filter).forEach(doc -> System.out.println(doc.toJson().indent(4)));
 
-        restaurantesCollection.deleteMany(filter);
-
-        mongoClient.close();
+        restaurantsCollection.deleteMany(filter);
     }
 }
