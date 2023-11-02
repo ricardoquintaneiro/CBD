@@ -1,10 +1,8 @@
 package cbd;
- 
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
-import javax.xml.crypto.dsig.spec.XPathType.Filter;
 
 import org.bson.Document;
 
@@ -29,53 +27,65 @@ public class CustomerServiceB {
                 "mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.10.6");
         this.mongoClient = MongoClients.create(connectionString);
         this.cbdDatabase = mongoClient.getDatabase("cbd");
-        if (cbdDatabase.getCollection("customerServiceB") != null) {
-            cbdDatabase.getCollection("customerServiceB").drop();
-        }
+        // if (cbdDatabase.getCollection("customerServiceB") != null) {
+            // cbdDatabase.getCollection("customerServiceB").drop();
+        // }
         this.cbdDatabase.createCollection("customerServiceB");
         this.customerServiceCollection = cbdDatabase.getCollection("customerServiceB");
     }
 
-
     public boolean requestProduct(String username, String product, int units) {
         Document userData = customerServiceCollection.find(Filters.eq("username", username)).first();
         long currentTime = System.currentTimeMillis() / 1000;
-        int productCount;
-        long firstRequestTime;
+        int productCount = 0;
+        long firstRequestTime = currentTime;
         if (userData != null) {
-            productCount = userData.getInteger(userData.getString("requests." + product));
             firstRequestTime = userData.getLong("first_request_time");
-        } else {
-            productCount = 0;
-            firstRequestTime = currentTime;
+            Document requests = userData.get("requests", Document.class);
+            if (requests != null && requests.containsKey(product)) {
+                productCount = requests.getInteger(product);
+            }
         }
         if (currentTime - firstRequestTime >= TIME_SLOT_IN_SECONDS) {
+            firstRequestTime = currentTime;
             productCount = 0;
         }
-        if (productCount + units > MAX_UNITS_PER_PRODUCT) {
+        if (productCount + units > MAX_UNITS_PER_PRODUCT)
             return false;
-        }
-        Document newUserData = new Document("username", username)
-            .append("first_request_time", firstRequestTime);
-        if (customerServiceCollection.find(Filters.eq("username", username)).first() == null)
-            customerServiceCollection.insertOne(newUserData);
-        else
-            customerServiceCollection.updateOne(Filters.eq("username", username), new Document("$set", newUserData));
         Map<String, Integer> newProductAndCount = new HashMap<>();
         newProductAndCount.put(product, productCount + units);
-        customerServiceCollection.updateOne(Filters.eq("username", username), new Document("$set", new Document("requests", newProductAndCount)));
+        Document newUserData = new Document("username", username)
+                .append("first_request_time", firstRequestTime);
+        if (userData != null) {
+            Document update;
+            if (userData.containsKey("requests")) {
+                Document updateOperation = new Document("requests." + product, productCount + units);
+                update = new Document("$set", updateOperation);
+            } else {
+                Document updateOperation = new Document("requests", new Document(product, productCount + units));
+                update = new Document("$set", updateOperation);
+            }
+            customerServiceCollection.updateOne(Filters.eq("username", username), update);
+        } else {
+            newUserData.append("requests", new Document(product, productCount + units));
+            customerServiceCollection.insertOne(newUserData);
+        }
         return true;
     }
 
     public void clearAllRequests(String username) {
-        customerServiceCollection.deleteOne(Filters.eq("username", username));
+    Document userData = customerServiceCollection.find(Filters.eq("username", username)).first();
+    if (userData != null) {
+        Document updatedUserData = new Document(userData);
+        updatedUserData.put("requests", new Document());
+        customerServiceCollection.replaceOne(Filters.eq("username", username), updatedUserData);
     }
-
+    }
 
     public void close() {
         this.mongoClient.close();
     }
-     
+
     public static void main(String[] args) {
         CustomerServiceB customerService = new CustomerServiceB();
         Scanner scanner = new Scanner(System.in);

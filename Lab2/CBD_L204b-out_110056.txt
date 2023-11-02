@@ -1,0 +1,57 @@
+Enter your username: Ricardo
+
+Options:
+1. Make a request
+2. Clear all requests
+3. Exit
+Enter your choice (1/2/3): 1
+Enter the product name: Produto1
+Enter the number of units: 30
+
+Request accepted.
+
+Options:
+1. Make a request
+2. Clear all requests
+3. Exit
+Enter your choice (1/2/3): 1   
+Enter the product name: Produto1
+Enter the number of units: 1 
+
+Request rejected: Exceeded limit!
+
+Options:
+1. Make a request
+2. Clear all requests
+3. Exit
+Enter your choice (1/2/3): 1
+Enter the product name: Produto2
+Enter the number of units: 5
+
+Request accepted.
+
+Options:
+1. Make a request
+2. Clear all requests
+3. Exit
+Enter your choice (1/2/3): 2
+
+All requests cleared.
+
+Options:
+1. Make a request
+2. Clear all requests
+3. Exit
+Enter your choice (1/2/3): 1
+Enter the product name: Produto1
+Enter the number of units: 30
+
+Request accepted.
+
+Options:
+1. Make a request
+2. Clear all requests
+3. Exit
+Enter your choice (1/2/3): 3
+
+Exiting Customer Service.

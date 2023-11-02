@@ -1,7 +1,5 @@
 package cbd;
  
-import java.util.Arrays;
-
 import org.bson.Document;
 
 import com.mongodb.ConnectionString;
@@ -81,7 +79,7 @@ public class CustomerServiceA {
                 System.out.println("Request rejected: Exceeded limit.");
             }
         }
-
         customerService.close();
+        System.exit(0);
     }
 }

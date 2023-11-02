@@ -1,0 +1,10 @@
+As duas implementações diferem não só na sintaxe dos comandos usados nos drivers mas também na
+arquitetura da base de dados. A implementação em Redis usa uma base de dados do tipo
+chave-valor, enquanto que a implementação em MongoDB usa uma base de dados do tipo
+documento. 
+A implementação em Redis é mais simples e mais rápida, mas a implementação
+em MongoDB é mais flexível, permitindo também a utilização de queries mais complexas,
+e é mais adequada a uma grande quantidade de dados. No entanto, no contexto deste problema,
+Redis seria a escolha mais adequada, uma vez que a quantidade de dados é pequena e a
+construção de queries complexas não é necessária.
+ 
