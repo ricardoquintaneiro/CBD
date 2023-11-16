@@ -1,0 +1,38 @@
+CREATE KEYSPACE IF NOT EXISTS cbd WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 1};
+USE cbd;
+
+CREATE TABLE utilizadores (
+    id uuid,
+    username text,
+    nome text,
+    email text,
+    password text,
+    timestamp timestamp,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE videos (
+    id uuid,
+    autor uuid,
+    nome text,
+    descricao text,
+    tags set<text>,
+    timestamp timestamp,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE comentarios (
+    id uuid,
+    autor uuid,
+    video uuid,
+    texto text,
+    timestamp timestamp,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE seguidores_video (
+    id uuid,
+    seguidor uuid,
+    video uuid,
+    PRIMARY KEY (id)
+);
