@@ -56,3 +56,4 @@ CREATE TABLE ratings_video (
 
 CREATE INDEX ON comentarios (autor);
 CREATE INDEX ON comentarios (video);
+CREATE INDEX ON video (tag);
