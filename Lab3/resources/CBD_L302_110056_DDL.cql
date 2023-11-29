@@ -19,16 +19,28 @@ CREATE TABLE videos (
     descricao text,
     tags set<text>,
     timestamp timestamp,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id, autor)
 );
 
-CREATE TABLE comentarios (
+CREATE INDEX ON videos (tag);
+CREATE INDEX ON videos (autor);
+
+CREATE TABLE comentarios_por_utilizador (
     id uuid,
     autor uuid,
     video uuid,
     texto text,
     timestamp timestamp,
-    PRIMARY KEY (id)
+    PRIMARY KEY (autor, timestamp, id)
+);
+
+CREATE TABLE comentarios_por_video (
+    id uuid,
+    autor uuid,
+    video uuid,
+    texto text,
+    timestamp timestamp,
+    PRIMARY KEY (video, timestamp, id)
 );
 
 CREATE TABLE seguidores_video (
@@ -50,10 +62,9 @@ CREATE TABLE eventos (
 
 CREATE TABLE ratings_video (
     video uuid,
-    ratings list<tinyint>,
-    PRIMARY KEY (video)
+    rating tinyint,
+    id uuid, 
+    PRIMARY KEY (video, rating, id)
 );
 
-CREATE INDEX ON comentarios (autor);
-CREATE INDEX ON comentarios (video);
-CREATE INDEX ON video (tag);
+

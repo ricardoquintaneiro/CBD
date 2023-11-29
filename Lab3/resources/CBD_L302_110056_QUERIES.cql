@@ -1,11 +1,14 @@
 // 7. Permitir a pesquisa de todos os videos de determinado autor;
+select * from videos where autor=0aee4739-3d74-430b-be8f-542a91990d9f;
 
 // 8. Permitir a pesquisa de comentarios por utilizador, ordenado inversamente pela data;
+select * from comentarios_por_utilizador where autor=0aee4739-3d74-430b-be8f-542a91990d9f order by timestamp desc;
 
 // 9. Permitir a pesquisa de comentarios por videos, ordenado inversamente pela data;
+select * from comentarios_por_video where video=58e90b21-495a-4c93-811b-91c3a227eb7c order by timestamp desc;
 
 // 10. Permitir a pesquisa do rating medio de um video e quantas vezes foi votado;
-
+select avg(cast(rating as double)) as media_rating, count(rating) as votos from ratings_video where video=58e90b21-495a-4c93-811b-91c3a227eb7c;
 
 
 // 1. Os ultimos 3 comentarios introduzidos para um video;
