@@ -101,5 +101,5 @@ INSERT INTO ratings_video(video, rating, id) VALUES (e77103d3-500e-43a0-9eac-09b
 INSERT INTO ratings_video(video, rating, id) VALUES (58e90b21-495a-4c93-811b-91c3a227eb7c, 3, uuid());
 INSERT INTO ratings_video(video, rating, id) VALUES (58e90b21-495a-4c93-811b-91c3a227eb7c, 5, uuid());
 INSERT INTO ratings_video(video, rating, id) VALUES (58e90b21-495a-4c93-811b-91c3a227eb7c, 4, uuid());
-INSERT INTO ratings_video(video, rating, id) VALUES (58e90b21-495a-4c93-811b-91c3a227eb7c, 2, uuid());
+INSERT INTO ratings_video(video, rating, id) VALUES (58e90b21-495a-4c93-811b-91c3a227eb7c, 3, uuid());
 INSERT INTO ratings_video(video, rating, id) VALUES (58e90b21-495a-4c93-811b-91c3a227eb7c, 1, uuid());
