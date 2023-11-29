@@ -1,21 +1,21 @@
 // 7. Permitir a pesquisa de todos os videos de determinado autor;
-SELECT * from videos where autor=0aee4739-3d74-430b-be8f-542a91990d9f;
+SELECT * FROM videos WHERE autor=0aee4739-3d74-430b-be8f-542a91990d9f;
 
 // 8. Permitir a pesquisa de comentarios por utilizador, ordenado inversamente pela data;
-SELECT * from comentarios_por_utilizador where autor=0aee4739-3d74-430b-be8f-542a91990d9f order by timestamp desc;
+SELECT * FROM comentarios_por_utilizador WHERE autor=0aee4739-3d74-430b-be8f-542a91990d9f ORDER BY timestamp DESC;
 
 // 9. Permitir a pesquisa de comentarios por videos, ordenado inversamente pela data;
-SELECT * from comentarios_por_video where video=58e90b21-495a-4c93-811b-91c3a227eb7c order by timestamp desc;
+SELECT * FROM comentarios_por_video WHERE video=58e90b21-495a-4c93-811b-91c3a227eb7c ORDER BY timestamp DESC;
 
 // 10. Permitir a pesquisa do rating medio de um video e quantas vezes foi votado;
-SELECT avg(cast(rating as double)) as media_rating, count(rating) as votos from ratings_video where video=58e90b21-495a-4c93-811b-91c3a227eb7c;
+SELECT AVG(CAST(rating as DOUBLE)) as media_rating, COUNT(rating) as votos FROM ratings_video WHERE video=58e90b21-495a-4c93-811b-91c3a227eb7c;
 
 
 // 1. Os ultimos 3 comentarios introduzidos para um video;
 SELECT * FROM comentarios_por_video WHERE video=58e90b21-495a-4c93-811b-91c3a227eb7c ORDER BY timestamp DESC LIMIT 3;
  
 // 2. Lista das tags de determinado video;
-select tags from videos where autor=70dd0f2f-1c2d-452a-9fbf-91096b421c74 and timestamp='2023-11-29 17:09:38.989000+0000' and id=40e4b650-c3a1-4716-904d-2e4187ba9c6f;
+SELECT tags FROM videos WHERE autor=70dd0f2f-1c2d-452a-9fbf-91096b421c74 AND timestamp='2023-11-29 17:09:38.989000+0000' AND id=40e4b650-c3a1-4716-904d-2e4187ba9c6f;
 
 // 3. Todos os videos com a tag Aveiro;
 Esta query não é possível de se realizar devido à estrutura da tabela dos vídeos, visto esta pesquisa não ser um requisito.
@@ -24,16 +24,16 @@ No entanto, podia-se criar um índice para a coluna tags. Assumindo que se podia
     SELECT * FROM videos WHERE tags CONTAINS 'Aveiro';
 
 // 4. Os ultimos 5 eventos de determinado video realizados por um utilizador;
-select * from eventos where video=58e90b21-495a-4c93-811b-91c3a227eb7c order by timestamp desc limit 5;
+SELECT * FROM eventos WHERE video=58e90b21-495a-4c93-811b-91c3a227eb7c ORDER BY timestamp DESC LIMIT 5;
 
 // 5. Videos partilhados por determinado utilizador (maria1987, por exemplo) num determinado periodo de tempo (Agosto de 2017, por exemplo);
-select * from videos where autor=0aee4739-3d74-430b-be8f-542a91990d9f and timestamp >= '2023-08-01' and timestamp < '2023-09-01';
+SELECT * FROM videos WHERE autor=0aee4739-3d74-430b-be8f-542a91990d9f AND timestamp >= '2023-08-01' AND timestamp < '2023-09-01';
 
 // 6. Os ultimos 10 videos, ordenado inversamente pela data da partilhada;
 Esta query não é possível devido à partition key (autor) não estar restrita, uma vez que estamos a pesquisar por todos os vídeos.
 
 // 7. Todos os seguidores (followers) de determinado video;
-select seguidores from seguidores_video where video=e88b714b-5cd8-40dd-b629-fb9b1503c578;
+SELECT seguidores FROM seguidores_video WHERE video=e88b714b-5cd8-40dd-b629-fb9b1503c578;
 
 // 8. Todos os comentarios (dos videos) que determinado utilizador esta a seguir (following);
 Esta query não é possível devido a serem necessários JOINs entre tabelas, o que não é possível em Cassandra.
@@ -50,7 +50,7 @@ Esta query não é possível porque não podemos ordenar sem restringir a partit
 Esta query não é possível devido à necessidade de separar os sets de tags em tags individuais, e juntar com os vídeos que as contêm.
 
 // 12. Retornar o nome, descricao e as tags de um determinado video;
-select nome, descricao, tags from videos where autor=70dd0f2f-1c2d-452a-9fbf-91096b421c74 and timestamp='2023-11-29 17:09:38.989000+0000' and id=40e4b650-c3a1-4716-904d-2e4187ba9c6f;
+SELECT nome, descricao, tags FROM videos WHERE autor=70dd0f2f-1c2d-452a-9fbf-91096b421c74 AND timestamp='2023-11-29 17:09:38.989000+0000' AND id=40e4b650-c3a1-4716-904d-2e4187ba9c6f;
 
 // 13. Retornar o primeiro comentário de um determinado video;
-select * from comentarios_por_video where video=58e90b21-495a-4c93-811b-91c3a227eb7c order by timestamp asc limit 1;
+SELECT * FROM comentarios_por_video WHERE video=58e90b21-495a-4c93-811b-91c3a227eb7c ORDER BY timestamp ASC LIMIT 1;
