@@ -15,7 +15,7 @@ SELECT avg(cast(rating as double)) as media_rating, count(rating) as votos from 
 SELECT * FROM comentarios_por_video WHERE video=58e90b21-495a-4c93-811b-91c3a227eb7c ORDER BY timestamp DESC LIMIT 3;
  
 // 2. Lista das tags de determinado video;
-select tags from videos where id=40e4b650-c3a1-4716-904d-2e4187ba9c6f;
+select tags from videos where autor=70dd0f2f-1c2d-452a-9fbf-91096b421c74 and timestamp='2023-11-29 17:09:38.989000+0000' and id=40e4b650-c3a1-4716-904d-2e4187ba9c6f;
 
 // 3. Todos os videos com a tag Aveiro;
 Esta query não é possível de se realizar devido à estrutura da tabela dos vídeos, visto esta pesquisa não ser um requisito.
@@ -47,8 +47,10 @@ Esta query não é possível porque não podemos ordenar sem restringir a partit
     
 
 // 11. Lista com as Tags existentes e o numero de videos catalogados com cada uma delas;
-Esta query não é possível devido à necessidade de JOINs.
+Esta query não é possível devido à necessidade de separar os sets de tags em tags individuais, e juntar com os vídeos que as contêm.
 
-// 12.
+// 12. Retornar o nome, descricao e as tags de um determinado video;
+select nome, descricao, tags from videos where autor=70dd0f2f-1c2d-452a-9fbf-91096b421c74 and timestamp='2023-11-29 17:09:38.989000+0000' and id=40e4b650-c3a1-4716-904d-2e4187ba9c6f;
 
-// 13.
+// 13. Retornar o primeiro comentário de um determinado video;
+select * from comentarios_por_video where video=58e90b21-495a-4c93-811b-91c3a227eb7c order by timestamp asc limit 1;
