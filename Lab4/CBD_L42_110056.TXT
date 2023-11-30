@@ -1,0 +1,42 @@
+// NMEC: 00000
+
+#1 Encontre todos os atores que dirigiram um filme em que também atuaram e apresente o nome do ator e o título do filme.
+match ...
+
+# 2. Para cada filme realizado depois de 2005, apresente os nomes de todos os atores que atuaram nesse filme.
+
+# 3. Encontre pares de nós com mais do que uma relação entre si.
+
+# 4. Encontre todos os pares de pessoas que fizeram revisões do mesmo filme. Apresente os seus nomes e título de cada filme.
+
+# 5. Encontre todos os pares de atores que atuaram em vários filmes juntos.
+
+# 6. Determine a idade média do elenco do filme "Apollo 13" no ano do lançamento do filme.
+
+# 7. Encontre os 10 filmes com o elenco mais velho no momento do lançamento do filme. Apresente o filme e a idade média arredondada a 2 casas decimais, por ordem decrescente.
+
+# 8. Apresente o subgrafo ACTED_IN do filme com o elenco mais novo, no momento do lançamento do filme.
+
+# 9. Qual é o caminho mais curto (usando qualquer tipo de relação) entre John Cusack e Demi Moore?
+
+# 10. Qual a dimensão caminho mais curto (usando qualquer tipo de relação) entre Keanu Reeves e Tom Cruise?
+
+# 11. Quais são as dimensões do caminho mais curto entre pessoas com nome Jim e pessoas com nome Kevin?
+
+# 12. Que pessoas têm uma distância 2 para Jim Cash (a distância entre duas pessoas é o comprimento do caminho mais curto entre eles)?
+
+# 13. Qual é a maior distância de uma pessoa para Kevin Bacon?
+
+# 14. Qual é a maior distância entre duas pessoas?
+
+# 15. Qual é a distribuição de distâncias em pares (isto é, para a distância 1, 2, 3, ..., quantos pares de pessoas têm essa distância um do outro)?
+
+# 16. Indique as 10 pessoas com menor distância média em que o caminho entre elas são relações do tipo ACTED_IN.
+
+# 17. Apresente os atores que tiveram pelo menos uma role para personagens com o prefixo 'Dr.'. O resultado deve ser uma lista com o par “Ator, Lista das roles”.
+
+# 18.
+
+# 19.
+
+# 20.
