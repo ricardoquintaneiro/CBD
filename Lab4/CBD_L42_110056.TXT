@@ -1,13 +1,23 @@
-// NMEC: 00000
+// NMEC: 110056
 
 #1 Encontre todos os atores que dirigiram um filme em que também atuaram e apresente o nome do ator e o título do filme.
-match ...
+MATCH (people:Person)-[:DIRECTED]->(movie:Movie)<-[:ACTED_IN]-(people) 
+RETURN people
 
 # 2. Para cada filme realizado depois de 2005, apresente os nomes de todos os atores que atuaram nesse filme.
+MATCH (movies:Movie)<-[:ACTED_IN]-(actors:Person)
+WHERE movies.released > 2005
+RETURN actors.name
 
 # 3. Encontre pares de nós com mais do que uma relação entre si.
+MATCH (a)-[r]->(b)
+WITH a, b, count(r) AS count
+WHERE count > 1
+RETURN a, b
 
 # 4. Encontre todos os pares de pessoas que fizeram revisões do mesmo filme. Apresente os seus nomes e título de cada filme.
+MATCH (people:Person)-[:REVIEWED]->(movie:Movie)<-[:REVIEWED]-(people)
+RETURN people.name, movie.title
 
 # 5. Encontre todos os pares de atores que atuaram em vários filmes juntos.
 
@@ -40,3 +50,27 @@ match ...
 # 19.
 
 # 20.
+
+Cláusulas importantes:
+
+    MATCH
+    WITH
+    WHERE
+    RETURN
+    UNWIND
+
+Funções importantes:
+
+    count
+    avg
+    collect
+
+    Length
+    shortestPath
+
+Operadores importantes:    
+
+    =
+    <>
+    Starts with
+    AND
