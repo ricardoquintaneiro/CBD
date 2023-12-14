@@ -1,16 +1,28 @@
-// NMEC: 00000
+// NMEC: 110056
 
 # 0. Carregue o conteudo do ficheiro `/resouces/git_selection.csv`.
-LOAD CSV ...
-
+LOAD CSV WITH HEADERS FROM "file:///resources/git_selection.csv" AS row
+MERGE (u:User {id: trim(row.svn_id), name: trim(row.real_name)})
+MERGE (p:Project {name: trim(row.project_name)})
+MERGE (o:Organization {name: trim(row.organization)})
+MERGE (u)-[c:COMMITED_ON {commit: toInteger(trim(row.num)), role_on_project: trim(row.role_on_project)}]->(p)
+MERGE (u)-[m:WORKS_FOR]->(o)
 
 # 1. Liste a informação de cada utilizador.
+MATCH (u:User)
+RETURN u.id AS user_id, u.name AS user_name
 
 # 2. Liste o nome de cada utilizador.
+MATCH (u:User)
+RETURN DISTINCT u.name AS user_name
 
 # 3. Liste a informação de cada projeto, no qual tenha participado pelo menos um utilizador.
+MATCH (u:User)-[:COMMITED_ON]-(p:Project)
+RETURN DISTINCT p.name
 
 # 4. Liste os utilizadores e total de projetos em que cada um colabora.
+MATCH (u:User)-[:COMMITED_ON]-(p:Project)
+RETURN u.id, u.name, count(p)
 
 # 5. Liste os utilizadores e do total de projetos em que cada colabora ordenados por ordem decrescente do total.
 
