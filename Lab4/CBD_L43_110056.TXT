@@ -3,35 +3,40 @@
 # 0. Carregue o conteudo do ficheiro `/resouces/git_selection.csv`.
 LOAD CSV WITH HEADERS FROM "file:///resources/git_selection.csv" AS row
 WITH row,
-    REDUCE(s = trim(row.organization), term IN ['The', 'Corporation', 'Software Foundation', 'Gmbh', 'GmbH', 'corporation', 'Inc.'] | REPLACE(s, term, '')) as trimmed_org_name
-WITH row, trimmed_org_name,
+    REDUCE(s = trim(row.organization), term IN ["The", "Corporation", "Software Foundation", "Gmbh", "GmbH", "corporation", "Inc."] | REPLACE(s, term, "")) as trimmed_org_name,
+    REDUCE(s = trim(row.project_name), term IN ["Apache"] | REPLACE(s, term, "")) as trimmed_proj_name
+WITH row, trimmed_org_name, trimmed_proj_name,
     CASE trimmed_org_name
-        WHEN 'Fuse Source' THEN 'FuseSource'
-        WHEN 'HP Laboratories' THEN 'HP labs'
-        WHEN 'HortonWorks' THEN 'Hortonworks'
-        WHEN 'Independent consultant' THEN 'Independent'
-        WHEN 'LinkedIn Profile' THEN 'LinkedIn'
-        WHEN 'LinkedIn profile' THEN 'LinkedIn'
-        WHEN 'JBoss/Blog/organization' THEN 'JBoss'
-        WHEN 'Mortbay' THEN 'MortBay'
-        WHEN 'NequalsOne' THEN 'NEqualsOne'
-        WHEN 'Progress' THEN 'Progress Software'
-        WHEN 'RedHat' THEN 'Red Hat'
-        WHEN 'Redhat' THEN 'Red Hat'
-        WHEN 'ThoughtWorks' THEN 'Thoughtworks'
-        WHEN 'independent' THEN 'Independent'
-        WHEN 'tucana.at' THEN 'Tucana.at'
+        WHEN "Fuse Source" THEN "FuseSource"
+        WHEN "HP Laboratories" THEN "HP labs"
+        WHEN "HortonWorks" THEN "Hortonworks"
+        WHEN "Independent consultant" THEN "Independent"
+        WHEN "LinkedIn Profile" THEN "LinkedIn"
+        WHEN "LinkedIn profile" THEN "LinkedIn"
+        WHEN "JBoss/Blog/organization" THEN "JBoss"
+        WHEN "Mortbay" THEN "MortBay"
+        WHEN "NequalsOne" THEN "NEqualsOne"
+        WHEN "Progress" THEN "Progress Software"
+        WHEN "RedHat" THEN "Red Hat"
+        WHEN "Redhat" THEN "Red Hat"
+        WHEN "ThoughtWorks" THEN "Thoughtworks"
+        WHEN "independent" THEN "Independent"
+        WHEN "tucana.at" THEN "Tucana.at"
         ELSE trimmed_org_name
     END AS cleaned_org_name,
-    CASE row.project_name
-        WHEN 'hama' THEN 'Hama'
+    CASE trimmed_proj_name
+        WHEN "hama" THEN "Hama"
+        WHEN "Hbase" THEN "HBase"
+        WHEN "PIG" THEN "Pig"
     ELSE
-        row.project_name
+        trimmed_proj_name
     END AS cleaned_proj_name
 MERGE (u:User {id: trim(row.svn_id), name: trim(row.real_name)})
-MERGE (p:Project {name: trim(REPLACE(cleaned_proj_name, 'Apache', ''))})
+MERGE (p:Project {name: trim(trimmed_proj_name)})
 MERGE (o:Organization {name: trim(cleaned_org_name)})
-MERGE (u)-[c:COMMITED_TO {commit: toInteger(trim(row.num)), role_on_project: trim(row.role_on_project)}]->(p)
+MERGE (u)-[c:CONTRIBUTED_TO]->(p)
+ON CREATE SET c.commits = [toInteger(trim(row.num))], c.roles_on_project = [trim(row.role_on_project)]
+ON MATCH SET c.commits = c.commits + [toInteger(trim(row.num))], c.roles_on_project = c.roles_on_project + [trim(row.role_on_project)]
 MERGE (u)-[m:MEMBER_OF]->(o)
 
 # 1. Liste a informação de cada utilizador.
@@ -43,32 +48,36 @@ MATCH (u:User)
 RETURN u.name AS user_name
 
 # 3. Liste a informação de cada projeto, no qual tenha participado pelo menos um utilizador.
-MATCH (u:User)-[:COMMITED_TO]->(p:Project)
+MATCH (u:User)-[:CONTRIBUTED_TO]->(p:Project)
 RETURN DISTINCT p
 
 # 4. Liste os utilizadores e total de projetos em que cada um colabora.
-MATCH (u:User)-[:COMMITED_TO]->(p:Project)
+MATCH (u:User)-[:CONTRIBUTED_TO]->(p:Project)
 RETURN u.id, u.name, count(DISTINCT p) AS project_count
 
 # 5. Liste os utilizadores e do total de projetos em que cada colabora ordenados por ordem decrescente do total.
-MATCH (u:User)-[:COMMITED_TO]->(p:Project)
+MATCH (u:User)-[:CONTRIBUTED_TO]->(p:Project)
 RETURN u.id, u.name, count(DISTINCT p) AS project_count
 ORDER BY project_count DESC
 
 # 6. Liste projetos e total de membros em cada projeto.
-MATCH (u:User)-[:COMMITED_TO]->(p:Project)
-RETURN p.name, count(DISTINCT u)
+MATCH (u:User)-[:CONTRIBUTED_TO]->(p:Project)
+RETURN p.name AS project_name, count(u) AS user_count
+ORDER BY user_count DESC
 
 # 7. Liste projetos e total de membros com a role "Committer" em cada projeto.
-MATCH (u:User)-[c:COMMITED_TO]->(p:Project)
-WHERE "Committer" IN c.role_on_project
-RETURN p.name, COUNT(DISTINCT u)
+MATCH (u:User)-[c:CONTRIBUTED_TO]->(p:Project)
+WHERE "Committer" IN c.roles_on_project
+RETURN p.name AS project_name, COUNT(u) AS committers_count
+ORDER BY committers_count DESC
 
 # 8. Liste todos os utilizadores que participaram nos mesmo projetos do que o utilizador "atm" (id). Mostre os atributos: nome de "atm", nome utilizador 2, nome do projeto.
-MATCH (atm:User {id: "atm"})-[:COMMITED_TO]->(p:Project)<-[:COMMITED_TO]-(u2:User)
-RETURN DISTINCT atm.name, u2.name, p.name
+MATCH (atm:User {id: "atm"})-[:CONTRIBUTED_TO]->(p:Project)<-[:CONTRIBUTED_TO]-(u2:User)
+RETURN DISTINCT atm.name AS atm_name, u2.name AS user2_name, p.name AS project_name
+ORDER BY user2_name
 
 # 9. Liste todos os utilizadores que participaram com a role "Committer" em projetos em que o utilizador "atm" (id1) participou com a role "PMC".
-MATCH (atm:User {id: "atm"})-[c1:COMMITED_TO]->(p:Project)<-[c2:COMMITED_TO]-(u2:User)
-WHERE "Committer" IN c1.role_on_project AND "PMC" IN c2.role_on_project
-RETURN DISTINCT atm.name, u2.name, p.name
+MATCH (atm:User {id: "atm"})-[c_atm:CONTRIBUTED_TO]->(p:Project)<-[c_u2:CONTRIBUTED_TO]-(u2:User)
+WHERE "PMC" IN c_atm.roles_on_project AND "Committer" IN c_u2.roles_on_project
+RETURN DISTINCT atm.name AS atm_name, u2.name AS user2_name, p.name AS project_name
+ORDER BY user2_name
