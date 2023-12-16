@@ -2,34 +2,73 @@
 
 # 0. Carregue o conteudo do ficheiro `/resouces/git_selection.csv`.
 LOAD CSV WITH HEADERS FROM "file:///resources/git_selection.csv" AS row
+WITH row,
+    REDUCE(s = trim(row.organization), term IN ['The', 'Corporation', 'Software Foundation', 'Gmbh', 'GmbH', 'corporation', 'Inc.'] | REPLACE(s, term, '')) as trimmed_org_name
+WITH row, trimmed_org_name,
+    CASE trimmed_org_name
+        WHEN 'Fuse Source' THEN 'FuseSource'
+        WHEN 'HP Laboratories' THEN 'HP labs'
+        WHEN 'HortonWorks' THEN 'Hortonworks'
+        WHEN 'Independent consultant' THEN 'Independent'
+        WHEN 'LinkedIn Profile' THEN 'LinkedIn'
+        WHEN 'LinkedIn profile' THEN 'LinkedIn'
+        WHEN 'JBoss/Blog/organization' THEN 'JBoss'
+        WHEN 'Mortbay' THEN 'MortBay'
+        WHEN 'NequalsOne' THEN 'NEqualsOne'
+        WHEN 'Progress' THEN 'Progress Software'
+        WHEN 'RedHat' THEN 'Red Hat'
+        WHEN 'Redhat' THEN 'Red Hat'
+        WHEN 'ThoughtWorks' THEN 'Thoughtworks'
+        WHEN 'independent' THEN 'Independent'
+        WHEN 'tucana.at' THEN 'Tucana.at'
+        ELSE trimmed_org_name
+    END AS cleaned_org_name,
+    CASE row.project_name
+        WHEN 'hama' THEN 'Hama'
+    ELSE
+        row.project_name
+    END AS cleaned_proj_name
 MERGE (u:User {id: trim(row.svn_id), name: trim(row.real_name)})
-MERGE (p:Project {name: trim(row.project_name)})
-MERGE (o:Organization {name: trim(row.organization)})
-MERGE (u)-[c:COMMITED_ON {commit: toInteger(trim(row.num)), role_on_project: trim(row.role_on_project)}]->(p)
-MERGE (u)-[m:WORKS_FOR]->(o)
+MERGE (p:Project {name: trim(REPLACE(cleaned_proj_name, 'Apache', ''))})
+MERGE (o:Organization {name: trim(cleaned_org_name)})
+MERGE (u)-[c:COMMITED_TO {commit: toInteger(trim(row.num)), role_on_project: trim(row.role_on_project)}]->(p)
+MERGE (u)-[m:MEMBER_OF]->(o)
 
 # 1. Liste a informação de cada utilizador.
 MATCH (u:User)
-RETURN u.id AS user_id, u.name AS user_name
+RETURN u
 
 # 2. Liste o nome de cada utilizador.
 MATCH (u:User)
-RETURN DISTINCT u.name AS user_name
+RETURN u.name AS user_name
 
 # 3. Liste a informação de cada projeto, no qual tenha participado pelo menos um utilizador.
-MATCH (u:User)-[:COMMITED_ON]-(p:Project)
-RETURN DISTINCT p.name
+MATCH (u:User)-[:COMMITED_TO]->(p:Project)
+RETURN DISTINCT p
 
 # 4. Liste os utilizadores e total de projetos em que cada um colabora.
-MATCH (u:User)-[:COMMITED_ON]-(p:Project)
-RETURN u.id, u.name, count(p)
+MATCH (u:User)-[:COMMITED_TO]->(p:Project)
+RETURN u.id, u.name, count(DISTINCT p) AS project_count
 
 # 5. Liste os utilizadores e do total de projetos em que cada colabora ordenados por ordem decrescente do total.
+MATCH (u:User)-[:COMMITED_TO]->(p:Project)
+RETURN u.id, u.name, count(DISTINCT p) AS project_count
+ORDER BY project_count DESC
 
 # 6. Liste projetos e total de membros em cada projeto.
+MATCH (u:User)-[:COMMITED_TO]->(p:Project)
+RETURN p.name, count(DISTINCT u)
 
 # 7. Liste projetos e total de membros com a role "Committer" em cada projeto.
+MATCH (u:User)-[c:COMMITED_TO]->(p:Project)
+WHERE "Committer" IN c.role_on_project
+RETURN p.name, COUNT(DISTINCT u)
 
 # 8. Liste todos os utilizadores que participaram nos mesmo projetos do que o utilizador "atm" (id). Mostre os atributos: nome de "atm", nome utilizador 2, nome do projeto.
+MATCH (atm:User {id: "atm"})-[:COMMITED_TO]->(p:Project)<-[:COMMITED_TO]-(u2:User)
+RETURN DISTINCT atm.name, u2.name, p.name
 
 # 9. Liste todos os utilizadores que participaram com a role "Committer" em projetos em que o utilizador "atm" (id1) participou com a role "PMC".
+MATCH (atm:User {id: "atm"})-[c1:COMMITED_TO]->(p:Project)<-[c2:COMMITED_TO]-(u2:User)
+WHERE "Committer" IN c1.role_on_project AND "PMC" IN c2.role_on_project
+RETURN DISTINCT atm.name, u2.name, p.name

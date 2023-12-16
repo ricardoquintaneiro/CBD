@@ -397,7 +397,7 @@ num,svn_id,real_name,project_name,role_on_project,organization
 181,carlosvara,Carlos Vara,Apache Bean Validation,Committer,Amazon 
 757,cziegeler,Carsten Ziegeler,Apache Sling,Committer,Adobe
 764,cziegeler,Carsten Ziegeler,Apache Sling,PMC,Adobe
-1746,cziegeler ,Carsten Ziegeler,Apache Sling,Chair, Java Develope,Adobe 
+1746,cziegeler ,Carsten Ziegeler,Apache Sling,Chair Java Develope,Adobe 
 1758,cziegeler ,Carsten Ziegeler,Apache Sling,PMC Chair,Adobe 
 635,ca0635,Catalina Wei,Apache OpenJPA,Committer,IBM Corporation
 2580,ca2580,Catalina Wei,OpenJPA,NA,IBM
@@ -504,14 +504,14 @@ num,svn_id,real_name,project_name,role_on_project,organization
 1908,ceposta,Christian Posta,ActiveMQ,NA,Red Hat
 2130,ceposta,Christian Posta,Camel,NA,Red Hat
 2157,ch2157,Christian Posta,Camel,NA,Red Hat
-743,ch0743,Christian Schneider,Apache ServiceMix,Contributor,EnBW Energie Baden-WÌ_rttemberg
+743,ch0743,Christian Schneider,Apache ServiceMix,Contributor,EnBW Energie Baden-Wï¿½_rttemberg
 2056,ch2056,Christian Schneider,Aries,NA,Talend
-2694,ch2694,Christian Schneider,ServiceMix,NA,EnBW Energie Baden-WÌ_rttemberg
+2694,ch2694,Christian Schneider,ServiceMix,NA,EnBW Energie Baden-Wï¿½_rttemberg
 1214,cschneider,Christian Schneider,Apache Camel,Committer,Talend
 2131,cschneider,Christian Schneider,Camel,NA,Talend
 2505,cschneider,Christian Schneider,Karaf,NA,Talend
 2758,cschneider,Christian Schneider,Syncope,NA,Talend
-1730,ch1730,Christian Schneider,Apache ServiceMix,Contributor,EnBW Energie Baden-WÌ_rttemberg
+1730,ch1730,Christian Schneider,Apache ServiceMix,Contributor,EnBW Energie Baden-Wï¿½_rttemberg
 199,cschneider,Christian Schneider,Apache Camel,Committer,Talend 
 580,cschneider,Christian Schneider,Apache Karaf,Committer,Talend
 1599,cschneider,Christian Schneider,Apache Karaf,NA,Talend
@@ -823,7 +823,7 @@ num,svn_id,real_name,project_name,role_on_project,organization
 84,cutting,Doug Cutting,Apache Avro,Committer,Cloudera
 445,cutting,Doug Cutting,Apache Hadoop,PMC,Cloudera
 483,cutting,Doug Cutting,Apache Hadoop,Committer,Cloudera
-1063,cutting,Doug Cutting,Apache Avro,spec, java,Cloudera
+1063,cutting,Doug Cutting,Apache Avro,spec java,Cloudera
 1069,cutting,Doug Cutting,Apache Avro,Committer,Cloudera
 2090,cutting,Doug Cutting,Avro,NA,Cloudera
 2313,cutting,Doug Cutting,Hadoop,NA,Cloudera
@@ -1085,8 +1085,8 @@ num,svn_id,real_name,project_name,role_on_project,organization
 425,gchanan,Gregory Chanan,Apache Hbase,Committer,Cloudera
 2384,gchanan,Gregory Chanan,HBase,NA,Cloudera
 1401,gchanan,Gregory Chanan,Apache HBase,Committer,Cloudera 
-2759,gwimmel,Guido Wimmel,Syncope,NA,Stadtwerke MÌ_nchen Services Gm
-1803,gu1803,Guido Wimmel,Apache Syncope,Contributor,Stadtwerke MÌ_nchen Services Gm
+2759,gwimmel,Guido Wimmel,Syncope,NA,Stadtwerke Mï¿½_nchen Services Gm
+1803,gu1803,Guido Wimmel,Apache Syncope,Contributor,Stadtwerke Mï¿½_nchen Services Gm
 20,gnodet,Guillaume Nodet,ActiveMQ,Committer,Fuse Source
 617,gnodet,Guillaume Nodet,Apache ODE,PMC,Iona
 621,gnodet,Guillaume Nodet,Apache ODE,Committer,Iona
@@ -1157,11 +1157,11 @@ num,svn_id,real_name,project_name,role_on_project,organization
 2590,he2590,Helen Xu,OpenJPA,NA,IBM
 164,henning,Henning P. Schmiedehausen,Apache Velocity,PMC Member,The Henning Schmiedehausen Org
 169,henning,Henning P. Schmiedehausen,Apache Velocity,Committer,The Henning Schmiedehausen Org
-814,henning,Henning P. Schmiedehausen,Apache Turbine,Emeritus PMC Member,INTERMETA - Gesellschaft fÌ_r M
+814,henning,Henning P. Schmiedehausen,Apache Turbine,Emeritus PMC Member,INTERMETA - Gesellschaft fï¿½_r M
 977,henning,Henning P. Schmiedehausen,Apache Velocity Anakia,PMC Member,The Henning Schmiedehausen Org
 982,henning,Henning P. Schmiedehausen,Apache Velocity Anakia,Java developer,The Henning Schmiedehausen Org
 987,henning,Henning P. Schmiedehausen,Apache Velocity Anakia,Committer,The Henning Schmiedehausen Org
-1830,henning,Henning P. Schmiedehausen,Apache Turbine,PMC Emeritus,INTERMETA - Gesellschaft fÌ_r M
+1830,henning,Henning P. Schmiedehausen,Apache Turbine,PMC Emeritus,INTERMETA - Gesellschaft fï¿½_r M
 1835,henning,Henning P. Schmiedehausen,Apache Velocity,PMC Member,The Henning Schmiedehausen Org
 1840,henning,Henning P. Schmiedehausen,Apache Velocity,Java developer,The Henning Schmiedehausen Org
 2225,henry,Henry Robinson,Flume,NA,Cloudera
@@ -1248,12 +1248,12 @@ num,svn_id,real_name,project_name,role_on_project,organization
 2034,iv2034,Ivan Mitic,Ambari,NA,Microsoft
 2327,ivanmi,Ivan Mitic,Hadoop,NA,Microsoft
 1485,ivanmi,Ivan Mitic,Apache Hadoop,Committer,Microsoft 
-816,hoffmann,JÌ_rgen Hoffmann,Apache Turbine,Committer,ByteAction GmbH
-822,hoffmann,JÌ_rgen Hoffmann,Apache Turbine,PMC Member,HEAG MediaNet GmbH
-2772,hoffmann,JÌ_rgen Hoffmann,Turbine,NA,HEAG MediaNet GmbH
-1818,hoffmann,JÌ_rgen Hoffmann,Apache Turbine,PMC Member,HEAG MediaNet GmbH 
-1824,hoffmann,JÌ_rgen Hoffmann,Apache Turbine,Java Developer,ByteAction GmbH 
-1828,hoffmann,JÌ_rgen Hoffmann,Apache Turbine,Committer,ByteAction GmbH 
+816,hoffmann,Jï¿½_rgen Hoffmann,Apache Turbine,Committer,ByteAction GmbH
+822,hoffmann,Jï¿½_rgen Hoffmann,Apache Turbine,PMC Member,HEAG MediaNet GmbH
+2772,hoffmann,Jï¿½_rgen Hoffmann,Turbine,NA,HEAG MediaNet GmbH
+1818,hoffmann,Jï¿½_rgen Hoffmann,Apache Turbine,PMC Member,HEAG MediaNet GmbH 
+1824,hoffmann,Jï¿½_rgen Hoffmann,Apache Turbine,Java Developer,ByteAction GmbH 
+1828,hoffmann,Jï¿½_rgen Hoffmann,Apache Turbine,Committer,ByteAction GmbH 
 345,ja0345,Jacek Laskowski,Apache Geronimo,PMC,IONA
 389,ja0389,Jacek Laskowski,Apache Geronimo,Committer,IONA
 1891,ja1891,Jacob Meisler,Accumulo,NA,Booz Allen Hamilton
@@ -1375,7 +1375,7 @@ num,svn_id,real_name,project_name,role_on_project,organization
 1130,jaya,Jayachandra Sekhara Rao Sunkara,Apache Axis2,Committer,Computer Associates
 2577,jaydeep,Jaydeep Vishwakarma,Oozie,NA,Inmobi
 1987,jluniya,Jayush Luniya,Ambari,NA,Hortonworks
-2071,je2071,Jean-Baptiste OnofrÌÄå©,Aries,NA,Talend
+2071,je2071,Jean-Baptiste Onofrï¿½ï¿½ï¿½,Aries,NA,Talend
 716,jbonofre,Jean-Baptiste Onofre,Apache ServiceMix,Committer,Fimasys
 734,jbonofre,Jean-Baptiste Onofre,Apache ServiceMix,PMC,Fimasys
 906,jbonofre,Jean-Baptiste Onofre,Apache Syncope,Committer,Talend
@@ -1895,9 +1895,9 @@ num,svn_id,real_name,project_name,role_on_project,organization
 1620,mconcini,Michael Concini,Apache MyFaces,committer,IBM
 2550,mconcini,Michael Concini,MyFaces,NA,IBM
 1807,mconcini,Michael Concini,Apache Tobago,committer,IBM 
-555,mduerig,Michael DÌ_rig,Apache Jackrabbit,Committer,Adobe
-2477,mduerig,Michael DÌ_rig,Jackrabbit,NA,Adobe
-1570,mduerig,Michael DÌ_rig,Apache Jackrabbit,Committer,Adobe
+555,mduerig,Michael Dï¿½_rig,Apache Jackrabbit,Committer,Adobe
+2477,mduerig,Michael Dï¿½_rig,Jackrabbit,NA,Adobe
+1570,mduerig,Michael Dï¿½_rig,Apache Jackrabbit,Committer,Adobe
 28,mgaffney,Michael Gaffney,ActiveMQ,Committer,BoxTone
 933,mgaffney,Michael Gaffney,Apache ActiveMQ,Committer,BoxTone
 1925,mgaffney,Michael Gaffney,ActiveMQ,NA,BoxTone
@@ -1914,10 +1914,10 @@ num,svn_id,real_name,project_name,role_on_project,organization
 1000,mdrob,Mike Drob,Apache Accumulo,PMC,Cloudera
 1005,mdrob,Mike Drob,Apache Accumulo,Committer,Cloudera
 1885,mdrob,Mike Drob,Accumulo,NA,Cloudera
-761,mykee,Mike MÌ_ller,Apache Sling,Committer,MySign AG
-768,mykee,Mike MÌ_ller,Apache Sling,PMC,MySign AG
-1753,mykee ,Mike MÌ_ller,Apache Sling,Java Developer,MySign AG 
-1763,mykee ,Mike MÌ_ller,Apache Sling,PMC,MySign AG 
+761,mykee,Mike Mï¿½_ller,Apache Sling,Committer,MySign AG
+768,mykee,Mike Mï¿½_ller,Apache Sling,PMC,MySign AG
+1753,mykee ,Mike Mï¿½_ller,Apache Sling,Java Developer,MySign AG 
+1763,mykee ,Mike Mï¿½_ller,Apache Sling,PMC,MySign AG 
 2229,mpercy,Mike Percy,Flume,NA,Cloudera
 610,mperham,Mike Perham,Apache Maven,Emeritus,IBM
 2531,mperham,Mike Perham,Maven,NA,IBM
