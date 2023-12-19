@@ -1,0 +1,23 @@
+Cláusulas importantes:
+
+    MATCH
+    WITH
+    WHERE
+    RETURN
+    UNWIND
+
+Funções importantes:
+
+    count
+    avg
+    collect
+
+    Length
+    shortestPath
+
+Operadores importantes:    
+
+    =
+    <>
+    Starts with
+    AND

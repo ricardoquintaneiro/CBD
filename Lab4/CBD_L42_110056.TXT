@@ -94,32 +94,21 @@ WHERE ANY(role IN r.roles WHERE role STARTS WITH "Dr.")
 WITH actors, COLLECT(DISTINCT [role IN r.roles WHERE role STARTS WITH "Dr."]) AS drRoles
 RETURN [actors.name, REDUCE(s = [], roleList IN drRoles | s + roleList)] AS actorsAsDoctors
 
-# 18.
+# 18. Descubra os atores que representaram em pelo menos três filmes dirigidos pelo mesmo realizador.
+MATCH (actor:Person)-[:ACTED_IN]->(movie:Movie)<-[:DIRECTED]-(director:Person)
+WITH actor, director, COUNT(DISTINCT movie) AS moviesCount
+WHERE moviesCount >= 3
+RETURN actor.name, director.name, moviesCount
 
-# 19.
+# 19. Encontre o realizador que trabalhou com mais atores únicos.
+MATCH (director:Person)-[:DIRECTED]->(movie:Movie)<-[:ACTED_IN]-(actor:Person)
+WITH director, COUNT(DISTINCT actor) AS uniqueActorsCount
+ORDER BY uniqueActorsCount DESC
+LIMIT 1
+RETURN director.name, uniqueActorsCount
 
-# 20.
-
-Cláusulas importantes:
-
-    MATCH
-    WITH
-    WHERE
-    RETURN
-    UNWIND
-
-Funções importantes:
-
-    count
-    avg
-    collect
-
-    Length
-    shortestPath
-
-Operadores importantes:    
-
-    =
-    <>
-    Starts with
-    AND
+# 20. Liste os atores que representaram em filmes dirigidos por mais de um realizador. Apresente o nome do ator e os realizadores distintos com quem trabalhou nesses filmes.
+MATCH (actor:Person)-[:ACTED_IN]->(movie:Movie)<-[:DIRECTED]-(director:Person)
+WITH actor, COLLECT(DISTINCT director.name) AS uniqueDirectors
+WHERE size(uniqueDirectors) > 1
+RETURN actor.name, uniqueDirectors
