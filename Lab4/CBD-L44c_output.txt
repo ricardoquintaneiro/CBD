@@ -1,0 +1,293 @@
+
+Names of circuits in Portugal:
+	Autódromo do Estoril
+	Monsanto Park Circuit
+	Circuito da Boavista
+
+Names of races at Nürburgring:
+	German Grand Prix 1951
+	German Grand Prix 1952
+	German Grand Prix 1953
+	German Grand Prix 1954
+	German Grand Prix 1956
+	German Grand Prix 1957
+	German Grand Prix 1958
+	German Grand Prix 1961
+	German Grand Prix 1962
+	German Grand Prix 1963
+	German Grand Prix 1964
+	German Grand Prix 1965
+	German Grand Prix 1966
+	German Grand Prix 1967
+	German Grand Prix 1968
+	German Grand Prix 1969
+	German Grand Prix 1971
+	German Grand Prix 1972
+	German Grand Prix 1973
+	German Grand Prix 1974
+	German Grand Prix 1975
+	German Grand Prix 1976
+	European Grand Prix 1984
+	German Grand Prix 1985
+	European Grand Prix 1995
+	European Grand Prix 1996
+	Luxembourg Grand Prix 1997
+	Luxembourg Grand Prix 1998
+	European Grand Prix 1999
+	European Grand Prix 2000
+	European Grand Prix 2001
+	European Grand Prix 2002
+	European Grand Prix 2003
+	European Grand Prix 2004
+	European Grand Prix 2005
+	European Grand Prix 2006
+	European Grand Prix 2007
+	German Grand Prix 2009
+	German Grand Prix 2011
+	German Grand Prix 2013
+
+Names of the circuits where races where held in 2009:
+	Albert Park Grand Prix Circuit
+	Sepang International Circuit
+	Shanghai International Circuit
+	Bahrain International Circuit
+	Circuit de Barcelona-Catalunya
+	Circuit de Monaco
+	Istanbul Park
+	Silverstone Circuit
+	Nürburgring
+	Hungaroring
+	Valencia Street Circuit
+	Circuit de Spa-Francorchamps
+	Autodromo Nazionale di Monza
+	Marina Bay Street Circuit
+	Suzuka Circuit
+	Autódromo José Carlos Pace
+	Yas Marina Circuit
+
+Races held in between 2018-07-01 and 2018-10-21 included:
+	British Grand Prix 2018
+	German Grand Prix 2018
+	Hungarian Grand Prix 2018
+	Belgian Grand Prix 2018
+	Italian Grand Prix 2018
+	Singapore Grand Prix 2018
+	Japanese Grand Prix 2018
+	United States Grand Prix 2018
+	Austrian Grand Prix 2018
+	Russian Grand Prix 2018
+
+Return the top 5 of circuits where more races were held in and their count:
+	Circuit: Nürburgring, race count: 40
+	Circuit: Autodromo Nazionale di Monza, race count: 68
+	Circuit: Circuit de Monaco, race count: 65
+	Circuit: Silverstone Circuit, race count: 52
+	Circuit: Circuit de Spa-Francorchamps, race count: 51
+
+Return the circuits that held round 3 races:
+	Shanghai International Circuit
+	Bahrain International Circuit
+	Albert Park Grand Prix Circuit
+	Autódromo José Carlos Pace
+	Autodromo Enzo e Dino Ferrari
+	Autódromo Juan y Oscar Gálvez
+	Donington Park
+	Sepang International Circuit
+	Circuit de Monaco
+	Circuit de Spa-Francorchamps
+	Zolder
+	Circuit Paul Ricard
+	Long Beach
+	Kyalami
+	Jarama
+	Circuit Park Zandvoort
+	Reims-Gueux
+	Indianapolis Motor Speedway
+
+Return the top 10 of countries with more races and their count:
+	Italy, 96
+	Germany, 77
+	UK, 72
+	USA, 69
+	Monaco, 65
+	Belgium, 63
+	France, 60
+	Spain, 55
+	Canada, 49
+	Brazil, 46
+
+Find the most recent race for each circuit:
+	Fair Park: Dallas Grand Prix 1984
+	Nivelles-Baulers: Belgian Grand Prix 1974
+	Circuito da Boavista: Portuguese Grand Prix 1960
+	Phoenix street circuit: United States Grand Prix 1991
+	Jarama: Spanish Grand Prix 1981
+	Dijon-Prenois: French Grand Prix 1984
+	Autodromo Enzo e Dino Ferrari: San Marino Grand Prix 2006
+	Reims-Gueux: French Grand Prix 1966
+	AVUS: German Grand Prix 1959
+	Circuit de Barcelona-Catalunya: Spanish Grand Prix 2018
+	Autódromo Internacional Nelson Piquet: Brazilian Grand Prix 1989
+	Albert Park Grand Prix Circuit: Australian Grand Prix 2018
+	Sebring International Raceway: United States Grand Prix 1959
+	Watkins Glen: United States Grand Prix 1980
+	Baku City Circuit: Azerbaijan Grand Prix 2018
+	Kyalami: South African Grand Prix 1993
+	Zeltweg: Austrian Grand Prix 1964
+	Circuit Mont-Tremblant: Canadian Grand Prix 1970
+	Circuito de Jerez: European Grand Prix 1997
+	Circuit Park Zandvoort: Dutch Grand Prix 1985
+	Sochi Autodrom: Russian Grand Prix 2018
+	Zolder: Belgian Grand Prix 1984
+	Circuit of the Americas: United States Grand Prix 2018
+	Aintree: British Grand Prix 1962
+	Autódromo Juan y Oscar Gálvez: Argentine Grand Prix 1998
+	Bahrain International Circuit: Bahrain Grand Prix 2018
+	Okayama International Circuit: Pacific Grand Prix 1995
+	Yas Marina Circuit: Abu Dhabi Grand Prix 2018
+	Montjuïc: Spanish Grand Prix 1975
+	Indianapolis Motor Speedway: United States Grand Prix 2007
+	Monsanto Park Circuit: Portuguese Grand Prix 1959
+	Shanghai International Circuit: Chinese Grand Prix 2018
+	Le Mans: French Grand Prix 1967
+	Autódromo José Carlos Pace: Brazilian Grand Prix 2018
+	Charade Circuit: French Grand Prix 1972
+	Circuit Paul Ricard: French Grand Prix 2018
+	Hockenheimring: German Grand Prix 2018
+	Pescara Circuit: Pescara Grand Prix 1957
+	Circuit de Spa-Francorchamps: Belgian Grand Prix 2018
+	Las Vegas Street Circuit: Caesars Palace Grand Prix 1982
+	Riverside International Raceway: United States Grand Prix 1960
+	Sepang International Circuit: Malaysian Grand Prix 2017
+	Istanbul Park: Turkish Grand Prix 2011
+	Hungaroring: Hungarian Grand Prix 2018
+	Autódromo do Estoril: Portuguese Grand Prix 1996
+	Marina Bay Street Circuit: Singapore Grand Prix 2018
+	Circuit de Monaco: Monaco Grand Prix 2018
+	Red Bull Ring: Austrian Grand Prix 2018
+	Detroit Street Circuit: Detroit Grand Prix 1988
+	Mosport International Raceway: Canadian Grand Prix 1977
+	A1-Ring: Austrian Grand Prix 2003
+	Suzuka Circuit: Japanese Grand Prix 2018
+	Circuit Gilles Villeneuve: Canadian Grand Prix 2018
+	Korean International Circuit: Korean Grand Prix 2013
+	Rouen-Les-Essarts: French Grand Prix 1968
+	Adelaide Street Circuit: Australian Grand Prix 1995
+	Silverstone Circuit: British Grand Prix 2018
+	Valencia Street Circuit: European Grand Prix 2012
+	Brands Hatch: British Grand Prix 1986
+	Fuji Speedway: Japanese Grand Prix 2008
+	Circuit de Pedralbes: Spanish Grand Prix 1954
+	Autódromo Hermanos Rodríguez: Mexican Grand Prix 2018
+	Ain Diab: Moroccan Grand Prix 1958
+	Nürburgring: German Grand Prix 2013
+	Autodromo Nazionale di Monza: Italian Grand Prix 2018
+	Long Beach: United States Grand Prix West 1983
+	Scandinavian Raceway: Swedish Grand Prix 1978
+	Buddh International Circuit: Indian Grand Prix 2013
+	Donington Park: European Grand Prix 1993
+	Circuit Bremgarten: Swiss Grand Prix 1954
+	Circuit de Nevers Magny-Cours: French Grand Prix 2008
+	Prince George Circuit: South African Grand Prix 1965
+
+Names of races in Italy:
+	Pescara Grand Prix 1957
+	San Marino Grand Prix 1992
+	San Marino Grand Prix 1996
+	San Marino Grand Prix 1999
+	San Marino Grand Prix 1989
+	San Marino Grand Prix 1986
+	San Marino Grand Prix 1983
+	San Marino Grand Prix 1990
+	San Marino Grand Prix 1998
+	San Marino Grand Prix 1994
+	San Marino Grand Prix 2005
+	San Marino Grand Prix 2000
+	San Marino Grand Prix 1987
+	San Marino Grand Prix 1984
+	San Marino Grand Prix 1993
+	San Marino Grand Prix 1988
+	San Marino Grand Prix 2004
+	San Marino Grand Prix 1982
+	San Marino Grand Prix 1981
+	San Marino Grand Prix 2003
+	San Marino Grand Prix 2001
+	San Marino Grand Prix 2002
+	San Marino Grand Prix 1995
+	San Marino Grand Prix 1997
+	San Marino Grand Prix 1985
+	San Marino Grand Prix 2006
+	San Marino Grand Prix 1991
+	Italian Grand Prix 1980
+	Italian Grand Prix 2013
+	Italian Grand Prix 1959
+	Italian Grand Prix 1954
+	Italian Grand Prix 1976
+	Italian Grand Prix 1967
+	Italian Grand Prix 1952
+	Italian Grand Prix 2012
+	Italian Grand Prix 1973
+	Italian Grand Prix 1966
+	Italian Grand Prix 1988
+	Italian Grand Prix 2009
+	Italian Grand Prix 1955
+	Italian Grand Prix 1987
+	Italian Grand Prix 1993
+	Italian Grand Prix 1997
+	Italian Grand Prix 2003
+	Italian Grand Prix 1972
+	Italian Grand Prix 1989
+	Italian Grand Prix 1996
+	Italian Grand Prix 1983
+	Italian Grand Prix 2000
+	Italian Grand Prix 1991
+	Italian Grand Prix 2001
+	Italian Grand Prix 1986
+	Italian Grand Prix 2005
+	Italian Grand Prix 2018
+	Italian Grand Prix 1981
+	Italian Grand Prix 1970
+	Italian Grand Prix 2008
+	Italian Grand Prix 2011
+	Italian Grand Prix 2015
+	Italian Grand Prix 1974
+	Italian Grand Prix 1963
+	Italian Grand Prix 1995
+	Italian Grand Prix 1956
+	Italian Grand Prix 2004
+	Italian Grand Prix 1964
+	Italian Grand Prix 1957
+	Italian Grand Prix 1992
+	Italian Grand Prix 1978
+	Italian Grand Prix 1982
+	Italian Grand Prix 1984
+	Italian Grand Prix 1950
+	Italian Grand Prix 1971
+	Italian Grand Prix 1953
+	Italian Grand Prix 1990
+	Italian Grand Prix 2007
+	Italian Grand Prix 1965
+	Italian Grand Prix 2002
+	Italian Grand Prix 1961
+	Italian Grand Prix 1985
+	Italian Grand Prix 2010
+	Italian Grand Prix 1975
+	Italian Grand Prix 2017
+	Italian Grand Prix 1979
+	Italian Grand Prix 1977
+	Italian Grand Prix 1958
+	Italian Grand Prix 1962
+	Italian Grand Prix 1998
+	Italian Grand Prix 1960
+	Italian Grand Prix 1968
+	Italian Grand Prix 2014
+	Italian Grand Prix 2006
+	Italian Grand Prix 1969
+	Italian Grand Prix 2016
+	Italian Grand Prix 1994
+	Italian Grand Prix 1951
+	Italian Grand Prix 1999
+
+Names of circuits in Barcelona:
+	Montjuïc
+	Circuit de Pedralbes
