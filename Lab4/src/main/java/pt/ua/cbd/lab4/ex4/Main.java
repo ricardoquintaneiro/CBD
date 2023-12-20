@@ -185,7 +185,7 @@ public class Main implements AutoCloseable {
 
             circuitDatabase.createDatabase();
 
-            try (FileWriter fw = new FileWriter("CBD-L44c_output.txt")) {
+            try (FileWriter fw = new FileWriter("CBD_L44c_output.txt")) {
 
                 fw.write("\nNames of circuits in Portugal:\n");
                 circuitDatabase.circuitsByCountry("Portugal").forEach(circuit -> {

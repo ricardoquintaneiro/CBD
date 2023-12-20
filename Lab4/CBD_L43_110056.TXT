@@ -1,6 +1,7 @@
 // NMEC: 110056
 
 # 0. Carregue o conteudo do ficheiro `/resouces/git_selection.csv`.
+MATCH (n) DETACH DELETE n;
 LOAD CSV WITH HEADERS FROM "file:///resources/git_selection.csv" AS row
 WITH row,
     REDUCE(s = trim(row.organization), term IN ["The", "Corporation", "Software Foundation", "Gmbh", "GmbH", "corporation", "Inc."] | REPLACE(s, term, "")) as trimmed_org_name,
